@@ -66,7 +66,6 @@ import time
 import numpy as np
 import scipy.linalg
 import scipy.sparse
-from scipy.sparse import sparsetools
 
 from gensim import interfaces, matutils, utils
 from gensim.models import basemodel
@@ -960,7 +959,7 @@ def stochastic_svd(
         m, n = corpus.shape
         assert num_terms == m, f"mismatch in number of features: {m} in sparse matrix vs. {num_terms} parameter"
         o = random_state.normal(0.0, 1.0, (n, samples)).astype(y.dtype)  # draw a random gaussian matrix
-        sparsetools.csc_matvecs(
+        scipy.sparse.csc_matvecs(
             m, n, samples, corpus.indptr, corpus.indices,
             corpus.data, o.ravel(), y.ravel(),
         )  # y = corpus * o
@@ -994,7 +993,7 @@ def stochastic_svd(
             num_docs += n
             logger.debug("multiplying chunk * gauss")
             o = random_state.normal(0.0, 1.0, (n, samples), ).astype(dtype)  # draw a random gaussian matrix
-            sparsetools.csc_matvecs(
+            scipy.sparse.csc_matvecs(
                 m, n, samples, chunk.indptr, chunk.indices,  # y = y + chunk * o
                 chunk.data, o.ravel(), y.ravel(),
             )

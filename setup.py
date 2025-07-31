@@ -334,7 +334,7 @@ install_requires = [
     #
     # scipy 1.14.0 and onwards removes deprecated sparsetools submodule
     #
-    'scipy >= 1.7.0, <1.14.0',
+    'scipy >= 1.7.0',
     'smart_open >= 1.8.1',
 ]
 
